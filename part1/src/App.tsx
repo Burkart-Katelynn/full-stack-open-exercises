@@ -9,7 +9,7 @@ const Button = (props: { onClick: () => void; text: string }) => {
   return <button onClick={onClick}>{text}</button>;
 };
 
-const Statistic = (props: {
+const StatisticLine = (props: {
   text: string;
   value: number;
   isPercentage?: boolean;
@@ -38,12 +38,12 @@ const Statistics = (props: {
 
   return (
     <>
-      <Statistic text="good" value={good} />
-      <Statistic text="neutral" value={neutral} />
-      <Statistic text="bad" value={bad} />
-      <Statistic text="all" value={total} />
-      <Statistic text="average" value={average} />
-      <Statistic text="positive" value={positive} isPercentage />
+      <StatisticLine text="good" value={good} />
+      <StatisticLine text="neutral" value={neutral} />
+      <StatisticLine text="bad" value={bad} />
+      <StatisticLine text="all" value={total} />
+      <StatisticLine text="average" value={average} />
+      <StatisticLine text="positive" value={positive} isPercentage />
     </>
   );
 };
