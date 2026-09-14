@@ -22,11 +22,34 @@ const Statistic = (props: {
   );
 };
 
+const Statistics = (props: {
+  good: number;
+  neutral: number;
+  bad: number;
+  total: number;
+  average: number;
+  positive: number;
+}) => {
+  const { good, neutral, bad, total, average, positive } = props;
+
+  return (
+    <>
+      <Statistic text="good" value={good} />
+      <Statistic text="neutral" value={neutral} />
+      <Statistic text="bad" value={bad} />
+      <Statistic text="all" value={total} />
+      <Statistic text="average" value={average} />
+      <Statistic text="positive" value={positive} isPercentage />
+    </>
+  );
+};
+
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
+
   const [total, setTotal] = useState(0);
   const [average, setAverage] = useState(0);
   const [positive, setPositive] = useState(0);
@@ -49,28 +72,32 @@ const App = () => {
     badValue: number,
   ) => (goodValue / getTotal(goodValue, neutralValue, badValue)) * 100;
 
+  const updateStatistics = (
+    goodValue: number,
+    neutralValue: number,
+    badValue: number,
+  ) => {
+    setTotal(getTotal(goodValue, neutralValue, badValue));
+    setAverage(getAverage(goodValue, neutralValue, badValue));
+    setPositive(getPositive(goodValue, neutralValue, badValue));
+  };
+
   const handleGoodClick = () => {
     const newGood = good + 1;
     setGood(newGood);
-    setTotal(getTotal(newGood, neutral, bad));
-    setAverage(getAverage(newGood, neutral, bad));
-    setPositive(getPositive(newGood, neutral, bad));
+    updateStatistics(newGood, neutral, bad);
   };
 
   const handleNeutralClick = () => {
     const newNeutral = neutral + 1;
     setNeutral(newNeutral);
-    setTotal(getTotal(good, newNeutral, bad));
-    setAverage(getAverage(good, newNeutral, bad));
-    setPositive(getPositive(good, newNeutral, bad));
+    updateStatistics(good, newNeutral, bad);
   };
 
   const handleBadClick = () => {
     const newBad = bad + 1;
     setBad(newBad);
-    setTotal(getTotal(good, neutral, newBad));
-    setAverage(getAverage(good, neutral, newBad));
-    setPositive(getPositive(good, neutral, newBad));
+    updateStatistics(good, neutral, newBad);
   };
 
   return (
@@ -80,12 +107,14 @@ const App = () => {
       <Button onClick={handleNeutralClick} text="neutral" />
       <Button onClick={handleBadClick} text="bad" />
       <Header text="statistics" />
-      <Statistic text="good" value={good} />
-      <Statistic text="neutral" value={neutral} />
-      <Statistic text="bad" value={bad} />
-      <Statistic text="all" value={total} />
-      <Statistic text="average" value={average} />
-      <Statistic text="positive" value={positive} isPercentage />
+      <Statistics
+        good={good}
+        neutral={neutral}
+        bad={bad}
+        total={total}
+        average={average}
+        positive={positive}
+      />
     </>
   );
 };
