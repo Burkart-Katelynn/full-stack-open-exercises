@@ -16,9 +16,10 @@ const StatisticLine = (props: {
 }) => {
   const { text, value, isPercentage } = props;
   return (
-    <p>
-      {text} {isPercentage ? `${value} %` : value}
-    </p>
+    <tr>
+      <td>{text}</td>
+      <td>{isPercentage ? `${value} %` : value}</td>
+    </tr>
   );
 };
 
@@ -37,14 +38,14 @@ const Statistics = (props: {
   }
 
   return (
-    <>
+    <table>
       <StatisticLine text="good" value={good} />
       <StatisticLine text="neutral" value={neutral} />
       <StatisticLine text="bad" value={bad} />
       <StatisticLine text="all" value={total} />
       <StatisticLine text="average" value={average} />
       <StatisticLine text="positive" value={positive} isPercentage />
-    </>
+    </table>
   );
 };
 
