@@ -55,6 +55,7 @@ const App = () => {
       <Button handleClick={handleRandomAnecdote} text="Next Anecdote" />
       <Header text="Anecdote with Most Votes" />
       <Anecdote anecdote={getAnecdoteWithMostVotes()} />
+      <Votes votes={Math.max(...votes)} />
     </>
   );
 };
