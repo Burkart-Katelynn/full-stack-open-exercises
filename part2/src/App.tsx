@@ -29,7 +29,11 @@ const Total = (props: { parts: Part[] }) => {
     0,
   );
 
-  return <p>Number of exercises {totalExercises}</p>;
+  return (
+    <p>
+      <strong>Total of {totalExercises} exercises</strong>
+    </p>
+  );
 };
 
 const Course = (props: { course: Course }) => {
